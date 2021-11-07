@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Modal from '../utils/Modal';
 import Results from '../modals/Results';
+import { doOCR, doThreshold } from '../utils/OCR';
 
 function HeroHome() {
 
@@ -8,9 +9,16 @@ function HeroHome() {
     const [results, setResults] = useState(null);
     const [showResults, setShowResults] = useState(false);
 
+    const imageSrc = useRef(null);
+    const outputCanvas = useRef(null);
+
     const onFileUpload = (e) => {
-        let img = e.target.files[0];
-        // console.log(img);
+        imageSrc.current.src = URL.createObjectURL(e.target.files[0]);
+    }
+
+    const onImageLoad = async() => {
+        doThreshold(imageSrc.current);
+        setResults(await doOCR(outputCanvas.current));
         setShowResults(true);
     }
 
@@ -20,6 +28,8 @@ function HeroHome() {
 
     return (
         <section className="relative">
+            <img ref={imageSrc} id="imageSrc" height="850" onLoad={onImageLoad}/>
+            <canvas ref={outputCanvas} id="outputCanvas" height="850"></canvas>
             {(showResults && results) && (<Results show={showResults} results={results}/>)}
             {/* Illustration behind hero content */}
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none"

@@ -20,6 +20,7 @@
     "react-transition-group": "^4.4.1",
     "react-webcam": "^6.0.0",
     "tailwindcss": "^2.1.1",
+    "tesseract.js": "^2.1.5",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
