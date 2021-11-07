@@ -129,7 +129,7 @@ function HeroHome() {
                                             <div>
                                                 <a
                                                     className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4"
-                                                    href="https://github.com/Kenny2github/CostCatcher"
+                                                    href="https://github.com/Kenny2github/Rite"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
