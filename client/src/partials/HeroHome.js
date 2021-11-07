@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Modal from '../utils/Modal';
 import Results from '../modals/Results';
 
@@ -7,6 +7,9 @@ function HeroHome() {
     const [videoModalOpen, setVideoModalOpen] = useState(false);
     const [results, setResults] = useState({});
     const [showResults, setShowResults] = useState(false);
+
+    const imageSrc = useRef(null);
+    const outputCanvas = useRef(null);
 
     const onFileUpload = (e) => {
         let img = e.target.files[0];
@@ -23,6 +26,8 @@ function HeroHome() {
 
     return (
         <section className="relative">
+            <img ref={imageSrc} id="imageSrc" height="850" />
+            <canvas ref={outputCanvas} id="outputCanvas" height="850"></canvas>
             <Results show={showResults}/>
             {/* Illustration behind hero content */}
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none"
