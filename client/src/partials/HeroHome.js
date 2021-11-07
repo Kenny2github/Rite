@@ -13,7 +13,7 @@ function HeroHome() {
     const [results, setResults] = useState(null);
     const [showResults, setShowResults] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const { loaded, cv } = useOpenCv();
+    const cv = useOpenCv().cv;
 
     const imageSrc = useRef(null);
     const outputCanvas = useRef(null);
