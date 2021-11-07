@@ -105,7 +105,11 @@ export const doThreshold = (cv, imageSrc, spread = SPREAD, subtract = SUBTRACT) 
 export const doOCR = async canvas => {
 	let blob = await getCanvasBlob(canvas);
 	let url = URL.createObjectURL(blob);
-	let total;
+	let result = {
+		total: null,
+		spending_category: null,
+		payment_method: null
+	};
 	// OCR magic =)
 	const { data: { text } } = await worker.recognize(url);
 	// find anything that looks like a "Total:" chunk
@@ -114,11 +118,6 @@ export const doOCR = async canvas => {
 	let potential_total = potential_totals[potential_totals.length - 1];
 	if (!potential_total) {
 		// literally nothing even looks like "total" or "subtotal"
-		return {
-			total: null,
-			spending_category: null,
-			payment_method: null
-		};
 	} else if (potential_total[1]) {
 		// group 1 of this regex matches "sub" or "net" before "total"
 		// if the last match was a sub-total, this is not the final total
@@ -128,25 +127,15 @@ export const doOCR = async canvas => {
 		let potential_taxes = Array.from(text.matchAll(TAX_RE));
 		// like before, it should come last
 		let potential_tax = potential_taxes[potential_taxes.length - 1];
-		if (!potential_tax) {
-			// can't even fall back to subtotal + tax
-			return {
-				total: null,
-				spending_category: null,
-				payment_method: null
-			};
+		if (potential_tax) {
+			// group 2 of the tax regex matches the number
+			let tax = num(potential_tax[2]);
+			result.total = subtotal + tax;
 		}
-		// group 2 of the tax regex matches the number
-		let tax = num(potential_tax[2]);
-		total = subtotal + tax;
 	} else {
-		total = num(potential_total[3]);
+		result.total = num(potential_total[3]);
 	}
-	let cat = maxFromMatch(text, CAT_RES, CATS);
-	let meth = maxFromMatch(text, METH_RES, METHODS) || METHODS[0];
-	return {
-		total: total,
-		spending_category: cat,
-		payment_method: meth
-	};
+	result.spending_category = maxFromMatch(text, CAT_RES, CATS);
+	result.payment_method = maxFromMatch(text, METH_RES, METHODS) || METHODS[0];
+	return result;
 };
