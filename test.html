@@ -42,7 +42,12 @@
 			TOTAL_RE = /(s[ou]b|ne[t71]\s+)?([\[jf17t\]]?\s*[oun0]\s*[tf7]\s*[4a]\s*[17li\)_]?).*?([0-9]+\s*[.,'][0-9\s]+)\W*$/gim,
 			TAX_RE = /(H[GS]T|Tax\W*H).*([0-9]+\s*[.,'][0-9\s]+)$/gim;
 		const CAT_RES = [
-			//
+			/(cookie|cand(y|ies)|snack|chip|dorito|ruffle)/gim,
+			/(restaurant|eater(y|ies)|food|mcdonald|kfc)/gim,
+			/(sock|walk|winner|wear|lace|glove|uniqlo|pant|shirt|shoe|heel|jacket|coat)/gim,
+			/(best buy|outlet|comp|tech|keyb|mouse|head)/gim,
+			/(laundry|screw|nail|hammer|drill|ax|shovel)/gim,
+			/(nintendo|epic|xbox|play|game|entertain)/gim,
 		], CATS = [
 			'Snacks',
 			'Restaurant/Eating',
@@ -50,6 +55,12 @@
 			'Gadgets/Tech',
 			'Tools/Hardware',
 			'Entertainment/Games',
+		], METH_RES = [
+			/(cash|cdn|change|tend)/gim,
+			/(debit|interac)/gim,
+			/(credit|card)/gim,
+		], METHODS = [
+			'Cash', 'Debit/Interac', 'Credit'
 		];
 		let progress = document.getElementById('progress');
 		const worker = Tesseract.createWorker({ logger: m => {
@@ -88,6 +99,19 @@
 			doThreshold(img);
 			doOCR();
 		})
+		function maxFromMatch(text, res, list) {
+			let count = 0, result = null;
+			for (i = 0; i < res.length; ++i) {
+				let c = text.match(res[i]);
+				if (!c) continue;
+				c = c.length;
+				if (c > count) {
+					count = c;
+					result = list[i];
+				}
+			}
+			return result;
+		}
 		function doThreshold(img, spread = SPREAD, subtract = SUBTRACT) {
 			let mat = img.clone();
 			cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);
@@ -121,7 +145,9 @@
 				} else {
 					total = num(match[3]);
 				}
-				result.innerText += `Total: ${total}`;
+				let cat = maxFromMatch(text, CAT_RES, CATS);
+				let meth = maxFromMatch(text, METH_RES, METHODS) || METHODS[0];
+				result.innerText += `Total: ${total}\nCategory: ${cat}\nMethod: ${meth}`;
 			});
 		}
 	</script>
