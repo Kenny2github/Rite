@@ -1,6 +1,10 @@
-import cv from '../../vendor/opencv';
+// import cv from '../vendor/opencv';
+
 import Tesseract from 'tesseract.js';
 
+// const cv = require('../vendor/opencv');
+const cv = require('opencv4nodejs');
+// import cv from 'opencv4nodejs';
 const SPREAD = 69, SUBTRACT = 50;
 const TOTAL_RE = /(s[ou]b-?|ne[t71]\s+)?([\[jf17t\]]?\s*[oun0]\s*[tf7]\s*[4a]\s*[17li\)_]?).*?([0-9]+\s*[.,'][0-9\s]+)\W*$/gim;
 const TAX_RE = /(H[GS]T|Tax\W*H?).*([0-9]+\s*[.,'][0-9\s]+)$/gim;
@@ -86,7 +90,7 @@ const getCanvasBlob = canvas => {
  * @param {number} subtract The constant subtracted during thresholding
  * @return {cv.Mat} The resulting image data
  */
-const doThreshold = (imageSrc, spread = SPREAD, subtract = SUBTRACT) => {
+export const doThreshold = (imageSrc, spread = SPREAD, subtract = SUBTRACT) => {
 	let mat = cv.imread(imageSrc);
 	// convert image to grayscale
 	cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);
@@ -106,7 +110,7 @@ const doThreshold = (imageSrc, spread = SPREAD, subtract = SUBTRACT) => {
  * payment_method: string
  * }} The data from the canvas
  */
-const doOCR = async canvas => {
+export const doOCR = async canvas => {
 	let blob = await getCanvasBlob(canvas);
 	let url = URL.createObjectURL(blob);
 	let total;
@@ -146,5 +150,7 @@ const doOCR = async canvas => {
 		payment_method: meth
 	};
 };
-
-module.exports = { doThreshold, doOCR };
+//
+// exports.doThreshold = doThreshold;
+// exports.doOCR = doOCR;
+// module.exports = { doThreshold: doThreshold, doOCR: doOCR };

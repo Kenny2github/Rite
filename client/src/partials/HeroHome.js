@@ -28,8 +28,8 @@ function HeroHome() {
 
     return (
         <section className="relative">
-            <img ref={imageSrc} id="imageSrc" height="850" onLoad={onImageLoad}/>
-            <canvas ref={outputCanvas} id="outputCanvas" height="850"></canvas>
+            <img alt='' ref={imageSrc} id="imageSrc" height="850" onLoad={onImageLoad}/>
+            <canvas ref={outputCanvas} id="outputCanvas" height="850"/>
             {(showResults && results) && (<Results show={showResults} results={results}/>)}
             {/* Illustration behind hero content */}
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none"

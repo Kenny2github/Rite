@@ -12,6 +12,7 @@
     "autoprefixer": "^9.8.6",
     "cruip-js-toolkit": "^1.0.3",
     "node-sass": "^5.0.0",
+    "opencv4nodejs": "^5.6.0",
     "postcss": "^8.2.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -19,6 +20,7 @@
     "react-scripts": "4.0.3",
     "react-transition-group": "^4.4.1",
     "react-webcam": "^6.0.0",
+    "request": "^2.79.0",
     "tailwindcss": "^2.1.1",
     "tesseract.js": "^2.1.5",
     "web-vitals": "^1.1.1"
