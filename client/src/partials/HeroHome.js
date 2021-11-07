@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useOpenCv } from 'opencv-react';
 import Modal from '../utils/Modal';
 import Results from '../modals/Results';
 import { doOCR, doThreshold } from '../utils/OCR';
@@ -8,6 +9,7 @@ function HeroHome() {
     const [videoModalOpen, setVideoModalOpen] = useState(false);
     const [results, setResults] = useState(null);
     const [showResults, setShowResults] = useState(false);
+    const { loaded, cv } = useOpenCv();
 
     const imageSrc = useRef(null);
     const outputCanvas = useRef(null);
@@ -16,8 +18,8 @@ function HeroHome() {
         imageSrc.current.src = URL.createObjectURL(e.target.files[0]);
     }
 
-    const onImageLoad = async() => {
-        doThreshold(imageSrc.current);
+    const onImageLoad = async () => {
+        doThreshold(cv, imageSrc.current);
         setResults(await doOCR(outputCanvas.current));
         setShowResults(true);
     }
@@ -25,6 +27,11 @@ function HeroHome() {
     useEffect(() => {
         // setShowResults(showResults);
     }, [showResults]);
+
+    useEffect(() => {
+        if (cv) {
+        }
+    }, [cv]);
 
     return (
         <section className="relative">

@@ -1,5 +1,3 @@
-// import cv from '../vendor/opencv';
-
 import Tesseract from 'tesseract.js';
 
 // const cv = require('../vendor/opencv');
@@ -85,12 +83,13 @@ const getCanvasBlob = canvas => {
 /**
  * Convert an image into black and white only,
  * a format more suitable for OCR.
+ * @param cv The OpenCV module
  * @param {HTMLImageElement} imageSrc The <img> element holding the original image
  * @param {number} spread The degree of spread for Gaussian thresholding
  * @param {number} subtract The constant subtracted during thresholding
  * @return {cv.Mat} The resulting image data
  */
-export const doThreshold = (imageSrc, spread = SPREAD, subtract = SUBTRACT) => {
+export const doThreshold = (cv, imageSrc, spread = SPREAD, subtract = SUBTRACT) => {
 	let mat = cv.imread(imageSrc);
 	// convert image to grayscale
 	cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);
@@ -104,11 +103,11 @@ export const doThreshold = (imageSrc, spread = SPREAD, subtract = SUBTRACT) => {
 /**
  * Perform optical character recognition on a canvas' content.
  * @param {HTMLCanvasElement} canvas The canvas to process
- * @return {{
+ * @return {Promise<{
  * total: string,
  * spending_category: string,
  * payment_method: string
- * }} The data from the canvas
+ * }>} The data from the canvas
  */
 export const doOCR = async canvas => {
 	let blob = await getCanvasBlob(canvas);
@@ -150,7 +149,3 @@ export const doOCR = async canvas => {
 		payment_method: meth
 	};
 };
-//
-// exports.doThreshold = doThreshold;
-// exports.doOCR = doOCR;
-// module.exports = { doThreshold: doThreshold, doOCR: doOCR };
