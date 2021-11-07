@@ -13,7 +13,7 @@ const Results = (props) => {
             setTimeout(() => {
                 setShowAlert(false);
                 setShow(false);
-                window.location = "http://localhost:3000/";
+                window.location = "https://kenny2github.github.io/Rite/";
             }, 2000)
 
             if(!localStorage.getItem('data'))
