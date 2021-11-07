@@ -4,28 +4,8 @@ import { payment_methods, spending_categories } from '../utils/Options';
 
 const History = (props) => {
 
-    const [show, setShow] = useState(props.show);
-    const [history, setHistory] = useState(JSON.parse(localStorage.getItem('data')));
-
-    // const handleConfirmation = (confirmed) => {
-    //     if(results && confirmed) {
-    //         console.log(results)
-    //         if(!localStorage.getItem('data'))
-    //             localStorage.setItem('data', JSON.stringify([]));
-    //         else {
-    //             let data = JSON.parse(localStorage.getItem('data'));
-    //             data.push({
-    //                 'total': results.total,
-    //                 'spending_category': results.spending_category,
-    //                 'payment_method': results.payment_method
-    //             });
-    //             localStorage.setItem('data', JSON.stringify(data));
-    //             // reset results just in case
-    //             setResults(null);
-    //         }
-    //     }
-    //     setShow(false);
-    // }
+    const [show] = useState(props.show);
+    const [history] = useState(JSON.parse(localStorage.getItem('data')));
 
     return (
         <div>

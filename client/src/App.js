@@ -11,9 +11,8 @@ import AOS from 'aos';
 import { focusHandling } from 'cruip-js-toolkit';
 
 import Home from './pages/Home';
-import Camera from './camera/Camera';
 import Header from './partials/Header';
-import History from './modals/HIstory';
+import History from './modals/History';
 
 function App() {
 

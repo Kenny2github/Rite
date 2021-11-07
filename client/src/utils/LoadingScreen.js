@@ -6,12 +6,13 @@ const LoadingScreen = (props) => {
         // <div className="triple-spinner-container">
         //     <div className="triple-spinner"/>
         // </div>
-        <div className="relative pt-1">
-            <div className="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
+        <>
+            <div className="relative pt-1">
+                <div className="overflow-hidden h-2 text-xs flex rounded bg-blue-200">
 
-                <div
-    style={{ "width": props.progress * 100 + "%" }}
-    className="
+                    <div
+                        style={{ "width": props.progress * 100 + "%" }}
+                        className="
         shadow-none
         flex flex-col
         text-center
@@ -20,9 +21,13 @@ const LoadingScreen = (props) => {
         justify-center
         bg-blue-500
       "
-    />
+                    />
+                </div>
             </div>
-        </div>
+            <div className="triple-spinner-container">
+                <div className="triple-spinner"/>
+            </div>
+        </>
     );
 };
 

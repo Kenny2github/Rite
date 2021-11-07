@@ -6,7 +6,6 @@ import { useCustomEventListener } from 'react-custom-events';
 import LoadingScreen from '../utils/LoadingScreen';
 import Modal from '../utils/Modal';
 import { payment_methods, spending_categories } from '../utils/Options';
-import History from '../modals/HIstory';
 
 function HeroHome() {
 
