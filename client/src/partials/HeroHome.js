@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Modal from '../utils/Modal';
 
 function HeroHome() {
 
     const [videoModalOpen, setVideoModalOpen] = useState(false);
 
+    const onFileUpload = (e) => {
+        let img = e.target.files[0];
+        console.log(img);
+    }
+    
     return (
         <section className="relative">
 
@@ -26,19 +31,10 @@ function HeroHome() {
                         </linearGradient>
                     </defs>
 
-                    {/*<defs>*/}
-                    {/*  <radialGradient cx="21.152%" cy="86.063%" fx="21.152%" fy="86.063%" r="79.941%" id="header-logo">*/}
-                    {/*    <stop stopColor="#4FD1C5" offset="0%" />*/}
-                    {/*    <stop stopColor="#81E6D9" offset="25.871%" />*/}
-                    {/*    <stop stopColor="#338CF5" offset="100%" />*/}
-                    {/*  </radialGradient>*/}
-                    {/*</defs>*/}
                     <g fill="url(#illustration-01)" fillRule="evenodd">
                         <circle cx="1232" cy="128" r="128"/>
-                        {/*<circle cx="155" cy="443" r="64" />*/}
                     </g>
                     <g fill="url(#illustration-02)" fillRule="evenodd">
-                        {/*<circle cx="1232" cy="128" r="128" />*/}
                         <circle cx="155" cy="443" r="64"/>
                     </g>
                 </svg>
@@ -72,7 +68,8 @@ function HeroHome() {
                                  data-aos="zoom-y-out"
                                  data-aos-delay="300">
                                 <div>
-                                    <label htmlFor="upload" className="cursor-pointer">
+
+                                    <label htmlFor="upload" className="cursor-pointer" onChange={onFileUpload}>
                                         <span
                                             className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0">
                                         Start using
