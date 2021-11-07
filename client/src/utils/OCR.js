@@ -121,7 +121,11 @@ export const doOCR = async canvas => {
 	let potential_total = potential_totals[potential_totals.length - 1];
 	if (!potential_total) {
 		// literally nothing even looks like "total" or "subtotal"
-		return null;
+		return {
+			total: null,
+			spending_category: null,
+			payment_method: null
+		};
 	} else if (potential_total[1]) {
 		// group 1 of this regex matches "sub" or "net" before "total"
 		// if the last match was a sub-total, this is not the final total
@@ -133,7 +137,11 @@ export const doOCR = async canvas => {
 		let potential_tax = potential_taxes[potential_taxes.length - 1];
 		if (!potential_tax) {
 			// can't even fall back to subtotal + tax
-			return null;
+			return {
+				total: null,
+				spending_category: null,
+				payment_method: null
+			};
 		}
 		// group 2 of the tax regex matches the number
 		let tax = num(potential_tax[2]);
