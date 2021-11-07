@@ -15,13 +15,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "10.x"
+      - run: cd client
       - run: npm install
-      - run: npm run build
-      - run: npm test
-      - name: Deploy
-        uses: crazy-max/ghaction-github-pages@v1
-        with:
-          target_branch: gh-pages
-          build_dir: build
+      - run: npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
