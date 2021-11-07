@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { paymentMethods, spending_categories } from '../utils/Options';
 
 const Results = (props) => {
 
@@ -7,6 +8,7 @@ const Results = (props) => {
 
     const handleConfirmation = (confirmed) => {
         if(results && confirmed) {
+            console.log(results)
             if(!localStorage.getItem('data'))
                 localStorage.setItem('data', JSON.stringify([]));
             else {
@@ -18,10 +20,18 @@ const Results = (props) => {
                 });
                 localStorage.setItem('data', JSON.stringify(data));
                 // reset results just in case
-                setResults({});
+                setResults(null);
             }
         }
         setShow(false);
+    }
+
+    const updateResults = (total, cat, meth) => {
+        setResults({
+            total,
+            'spending_category': cat,
+            'payment_method': meth
+        });
     }
 
     return (
@@ -42,26 +52,56 @@ const Results = (props) => {
                                 </svg>
                             </button>
                         </div>
-                        <div className="flex flex-col px-6 py-5 bg-gray-50">
+                        <div className="flex px-6 py-5 bg-gray-50">
                             <div className="flex flex-col text-lg sm:flex-row items-center mb-5 sm:space-x-5">
                                 <div className="w-full sm:w-1/2">
-                                    <p className="mb-2 font-semibold text-gray-700">Total Spent</p>
-                                    <p className="w-full text-base p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none">
-                                        {results.total}
-                                    </p>
+                                    <p className="mb-2 font-semibold text-gray-700">Total Spent ($)</p>
+                                    {/*<p className="w-full text-base p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none">*/}
+                                    {/*    {results.total}*/}
+                                    {/*</p>*/}
+                                    <input
+                                        type="number" name=""
+                                        className="p-5 mb-5 bg-white border border-gray-200 rounded shadow-sm"
+                                        defaultValue={results.total}
+                                        onChange={(e) =>
+                                            updateResults(e.target.value, results.spending_category, results.payment_method)}
+                                    />
                                 </div>
                                 <div className="w-full sm:w-1/2">
-                                    <p className="mb-2 font-semibold text-gray-700">Shopping Category</p>
-                                    <p className="w-full text-base p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none">
-                                        {results.spending_category}
-                                    </p>
+                                    <p className="mb-2 font-semibold text-gray-700">Spending Category</p>
+                                    {/*<p className="w-full text-base p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none">*/}
+                                    {/*    {results.spending_category}*/}
+                                    {/*</p>*/}
+                                    <select
+                                        type="text"
+                                        name=""
+                                        className="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                                        id=""
+                                        defaultValue={results.spending_category}
+                                        onChange={(e) =>
+                                            updateResults(results.total, e.target.value, results.payment_method)}
+                                    >
+                                        {spending_categories.map((el, idx) => <option key={idx} value={idx}>{el}</option>)}
+                                    </select>
                                 </div>
                                 <br/>
                                 <div className="w-full sm:w-1/2 mt-2 sm:mt-0">
                                     <p className="mb-2 font-semibold text-gray-700">Payment Method</p>
-                                    <p className="w-full text-base p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none">
-                                        {results.payment_method}
-                                    </p>
+                                    {/*<p className="w-full text-base p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none">*/}
+                                    {/*    {results.payment_method}*/}
+                                    {/*</p>*/}
+                                    <select
+                                        type="text"
+                                        name=""
+                                        className="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                                        id=""
+                                        defaultValue={results.payment_method}
+                                        onChange={(e) =>
+                                            updateResults(results.total, results.spending_category, e.target.value)}
+                                    >
+                                        {paymentMethods.map((el, idx) => <option key={idx} value={idx}>{el}</option>)}
+
+                                    </select>
                                 </div>
                             </div>
                             <hr/>

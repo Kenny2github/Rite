@@ -1,4 +1,5 @@
 import Tesseract from 'tesseract.js';
+import { emitCustomEvent } from 'react-custom-events';
 
 const SPREAD = 69, SUBTRACT = 50;
 const TOTAL_RE = /(s[ou]b-?|ne[t71]\s+)?([[jf17t\]]?\s*[oun0]\s*[tf7]\s*[4a]\s*[17li)_]?).*?([0-9]+\s*[.,'][0-9\s]+)\W*$/gim;
@@ -13,22 +14,24 @@ const CAT_RES = [
 ];
 const CATS = [
 	'Snacks',
-	'Restaurant/Eating',
-	'Clothes/Fashion',
-	'Gadgets/Tech',
-	'Tools/Hardware',
-	'Entertainment/Games',
+	'Restaurant',
+	'Clothes',
+	'Gadgets',
+	'Tools',
+	'Entertainment',
 ];
 const METH_RES = [
 	/(cash|cdn|change|tend)/gim,
 	/(debit|interac)/gim,
 	/(credit|card)/gim,
 ];
-const METHODS = ['Cash', 'Debit/Interac', 'Credit'];
+const METHODS = ['Cash', 'Debit Card/Interac', 'Credit Card'];
 
-const worker = Tesseract.createWorker({ logger: m => document.dispatchEvent(
-	new CustomEvent('ocrprogress', { detail: m })
-)});
+// const worker = Tesseract.createWorker({ logger: m => document.dispatchEvent(
+// 	new CustomEvent('ocrprogress', { detail: m })
+// )});
+const worker = Tesseract.createWorker({ logger: m => emitCustomEvent('ocrprogress', {detail: m})});
+
 (async () => {
 	await worker.load();
 	await worker.loadLanguage('eng');
