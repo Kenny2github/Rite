@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>Hello OpenCV.js</title>
 	<script async src="vendor/opencv.js" onload="console.log('loaded opencv');" type="text/javascript"></script>
-	<script async src="vendor/tesseract.min.js"></script>
+	<script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
 	<style>
 		/*#imageSrc, #outputCanvas {
 			max-height: 90vh;
@@ -23,6 +23,12 @@
 	</div>
 	<script type="text/javascript">
 		const SPREAD = 49, SUBTRACT = 49;
+		const worker = Tesseract.createWorker({ logger: m => console.log(m) });
+		(async () => {
+			await worker.load();
+			await worker.loadLanguage('eng');
+			await worker.initialize('eng');
+		})();
 		let imgElement = document.getElementById("imageSrc")
 		let inputElement = document.getElementById("fileInput");
 		let canvas = document.getElementById("outputCanvas");
@@ -37,11 +43,10 @@
 			cv.imshow("outputCanvas", mat);
 		});
 		function doit() {
-			canvas.toBlob(blob => {
+			canvas.toBlob(async blob => {
 				let url = URL.createObjectURL(blob);
-				Tesseract.recognize(url, 'eng', { logger: m => console.log(m) }).then(d => {
-					console.log(d.data.text);
-				});
+				const { data: { text } } = await worker.recognize(url);
+				console.log(text);
 			});
 		}
 	</script>
