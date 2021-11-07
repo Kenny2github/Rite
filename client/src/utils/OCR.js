@@ -1,5 +1,6 @@
 import Tesseract from 'tesseract.js';
 import { emitCustomEvent } from 'react-custom-events';
+import { spending_categories as CATS, payment_methods as METHODS } from './Options';
 
 const SPREAD = 69, SUBTRACT = 50;
 const TOTAL_RE = /(s[ou]b-?|ne[t71]\s+)?([[jf17t\]]?\s*[oun0]\s*[tf7]\s*[4a]\s*[17li)_]?).*?([0-9]+\s*[.,'][0-9\s]+)\W*$/gim;
@@ -12,20 +13,11 @@ const CAT_RES = [
 	/(laundry|screw|nail|hammer|drill|ax|shovel)/gim,
 	/(nintendo|epic|xbox|play|game|entertain)/gim,
 ];
-const CATS = [
-	'Snacks',
-	'Restaurant',
-	'Clothes',
-	'Gadgets',
-	'Tools',
-	'Entertainment',
-];
 const METH_RES = [
 	/(cash|cdn|change|tend)/gim,
 	/(debit|interac)/gim,
 	/(credit|card)/gim,
 ];
-const METHODS = ['Cash', 'Debit Card/Interac', 'Credit Card'];
 
 // const worker = Tesseract.createWorker({ logger: m => document.dispatchEvent(
 // 	new CustomEvent('ocrprogress', { detail: m })

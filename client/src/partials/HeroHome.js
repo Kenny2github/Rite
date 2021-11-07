@@ -5,7 +5,7 @@ import { doOCR, doThreshold } from '../utils/OCR';
 import { useCustomEventListener } from 'react-custom-events';
 import LoadingScreen from '../utils/LoadingScreen';
 import Modal from '../utils/Modal';
-import { paymentMethods, spending_categories } from '../utils/Options';
+import { payment_methods, spending_categories } from '../utils/Options';
 
 function HeroHome() {
 
@@ -47,7 +47,7 @@ function HeroHome() {
             {/*    {*/}
             {/*        'total': 23,*/}
             {/*        'spending_category': spending_categories.indexOf('Entertainment/Games'),*/}
-            {/*        'payment_method': paymentMethods.indexOf('Visa Card')*/}
+            {/*        'payment_method': payment_methods.indexOf('Visa Card')*/}
             {/*    }*/}
             {/*}/>*/}
             <section className="relative">
@@ -58,7 +58,7 @@ function HeroHome() {
                         {(showResults && results) && (<Results show={showResults} results={{
                             'total': results.total,
                             'spending_category': spending_categories.indexOf(results.spending_category),
-                            'payment_method': paymentMethods.indexOf(results.payment_method)
+                            'payment_method': payment_methods.indexOf(results.payment_method)
                         }}/>)}
                         <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none"
                              aria-hidden="true">

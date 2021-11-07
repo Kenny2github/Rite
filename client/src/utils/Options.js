@@ -7,7 +7,7 @@ export const spending_categories = [
     'Entertainment',
 ];
 
-export const paymentMethods = [
+export const payment_methods = [
     'Cash',
     'Debit Card/Interac',
     'Visa Card'

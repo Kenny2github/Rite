@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { paymentMethods, spending_categories } from '../utils/Options';
+import { payment_methods, spending_categories } from '../utils/Options';
 
 const Results = (props) => {
 
@@ -99,7 +99,7 @@ const Results = (props) => {
                                         onChange={(e) =>
                                             updateResults(results.total, results.spending_category, e.target.value)}
                                     >
-                                        {paymentMethods.map((el, idx) => <option key={idx} value={idx}>{el}</option>)}
+                                        {payment_methods.map((el, idx) => <option key={idx} value={idx}>{el}</option>)}
 
                                     </select>
                                 </div>
