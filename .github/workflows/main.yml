@@ -15,8 +15,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "10.x"
-      - run: cd client
       - run: npm install
+        working-directory: client
       - run: npm run deploy
+        working-directory: client
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
