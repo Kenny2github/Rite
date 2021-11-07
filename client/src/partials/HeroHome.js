@@ -1,18 +1,29 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../utils/Modal';
+import Results from '../modals/Results';
 
 function HeroHome() {
 
     const [videoModalOpen, setVideoModalOpen] = useState(false);
+    const [results, setResults] = useState({});
+    const [showResults, setShowResults] = useState(false);
 
     const onFileUpload = (e) => {
         let img = e.target.files[0];
         console.log(img);
+        // setShowResults
+        // do your thing and call showResults
+        setShowResults(true);
     }
-    
+
+    useEffect(() => {
+        setShowResults(showResults);
+        console.log("hi")
+    }, [showResults]);
+
     return (
         <section className="relative">
-
+            <Results show={showResults}/>
             {/* Illustration behind hero content */}
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none"
                  aria-hidden="true">
