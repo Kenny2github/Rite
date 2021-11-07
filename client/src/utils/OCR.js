@@ -17,7 +17,7 @@ const CAT_RES = [
 const METH_RES = [
 	/(cash|cdn|change|tend)/gim,
 	/(debit|interac)/gim,
-	/(credit|card)/gim,
+	/(credit)/gim,
 ];
 
 // const worker = Tesseract.createWorker({ logger: m => document.dispatchEvent(
