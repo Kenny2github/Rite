@@ -1,4 +1,5 @@
 export const spending_categories = [
+    'Other',
     'Snacks',
     'Restaurant',
     'Clothes',

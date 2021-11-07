@@ -6,6 +6,7 @@ const SPREAD = 69, SUBTRACT = 50;
 const TOTAL_RE = /(s[ou]b-?|ne[t71]\s+)?([[jf17t\]]?\s*[oun0]\s*[tf7]\s*[4a]\s*[17li)_]?).*?([0-9]+\s*[.,'][0-9\s]+)\W*$/gim;
 const TAX_RE = /(H[GS]T|Tax\W*H?).*([0-9]+\s*[.,'][0-9\s]+)$/gim;
 const CAT_RES = [
+	/^(?!x)x/i, // "Other" will never match
 	/(cookie|cand(y|ies)|snack|chip|dorito|ruffle)/gim,
 	/(restaurant|eater(y|ies)|food|mcdonald|kfc)/gim,
 	/(sock|walk|winner|wear|lace|glove|uniqlo|pant|shirt|shoe|heel|jacket|coat)/gim,
