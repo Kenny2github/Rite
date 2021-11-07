@@ -4,20 +4,6 @@ object-assign
 @license MIT
 */
 
-/*! exports provided: default */
-
-/*! no static exports found */
-
-/*! react */
-
-/*!******************************!*\
-        !*** ./src/react-webcam.tsx ***!
-        \******************************/
-
-/*!**************************************************************************************!*\
-        !*** external {"root":"React","commonjs2":"react","commonjs":"react","amd":"react"} ***!
-        \**************************************************************************************/
-
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
