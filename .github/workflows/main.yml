@@ -15,11 +15,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14.x"
+      - run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: npm install
         working-directory: client
       - run: npm run deploy
         working-directory: client
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
-          GIT_AUTHOR_NAME: GitHub Actions
-          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
