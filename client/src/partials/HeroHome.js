@@ -6,6 +6,7 @@ import { useCustomEventListener } from 'react-custom-events';
 import LoadingScreen from '../utils/LoadingScreen';
 import Modal from '../utils/Modal';
 import { payment_methods, spending_categories } from '../utils/Options';
+import History from '../modals/HIstory';
 
 function HeroHome() {
 
@@ -13,6 +14,7 @@ function HeroHome() {
     const [results, setResults] = useState(null);
     const [showResults, setShowResults] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
     const cv = useOpenCv().cv;
 
     const imageSrc = useRef(null);
@@ -30,6 +32,7 @@ function HeroHome() {
     }
 
     useCustomEventListener('ocrprogress', data => {
+        setProgress(data.detail.progress);
         console.log(data.detail.progress);
         if(data.detail.progress === 1) {
             console.log("end")
@@ -53,7 +56,7 @@ function HeroHome() {
             <section className="relative">
                 <img alt='' ref={imageSrc} id="imageSrc" height="850" onLoad={onImageLoad}/>
                 <canvas ref={outputCanvas} id="outputCanvas" height="850"/>
-                {isLoading ? <LoadingScreen/> :
+                {isLoading ? <LoadingScreen progress={progress}/> :
                     <div>
                         {(showResults && results) && (<Results show={showResults} results={{
                             'total': results.total,
@@ -106,11 +109,7 @@ function HeroHome() {
                                     <div className="max-w-3xl mx-auto">
                                         <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out"
                                            data-aos-delay="150">
-                                            Bees are small flying insects, buzzing around with its painful stings which
-                                            always make
-                                            people afraid
-                                            and annoyed.
-                                            Without bees, aftermath.
+                                            Don't waste time collecting receipts and recording them at home. Scan them here and now, to track your spending as you spend!
                                         </p>
                                         <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"
                                              data-aos="zoom-y-out"

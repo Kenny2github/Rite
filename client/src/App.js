@@ -12,6 +12,8 @@ import { focusHandling } from 'cruip-js-toolkit';
 
 import Home from './pages/Home';
 import Camera from './camera/Camera';
+import Header from './partials/Header';
+import History from './modals/HIstory';
 
 function App() {
 
@@ -39,8 +41,9 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/camera">
-          <Camera />
+        <Route path="/history">
+          <Header />
+          <History show={true}/>
         </Route>
       </Switch>
     </>
