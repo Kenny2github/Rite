@@ -1,4 +1,5 @@
 name: Node.js CI
+
 on:
   push:
     branches:
@@ -6,8 +7,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-test-deploy:
+  build-deploy:
+    name: Build and Deploy
     runs-on: windows-latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -15,12 +18,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14.x"
-      - run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: npm install
         working-directory: client
-      - run: npm run deploy
+      - run: npm run build
         working-directory: client
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: client/build
