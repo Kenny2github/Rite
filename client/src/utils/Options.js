@@ -11,5 +11,5 @@ export const spending_categories = [
 export const payment_methods = [
     'Cash',
     'Debit Card/Interac',
-    'Visa Card'
+    'Credit Card'
 ];
