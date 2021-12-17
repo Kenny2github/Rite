@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useOpenCv } from 'opencv-react';
+import React, { useEffect, useState } from 'react';
 import Results from '../modals/Results';
-import { doOCR, doThreshold } from '../utils/OCR';
-import { useCustomEventListener } from 'react-custom-events';
+import { doOCR } from '../utils/OCR';
 import LoadingScreen from '../utils/LoadingScreen';
 import Modal from '../utils/Modal';
 import { payment_methods, spending_categories } from '../utils/Options';
@@ -13,31 +11,13 @@ function HeroHome() {
     const [results, setResults] = useState(null);
     const [showResults, setShowResults] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [progress, setProgress] = useState(0);
-    const cv = useOpenCv().cv;
 
-    const imageSrc = useRef(null);
-    const outputCanvas = useRef(null);
-
-    const onFileUpload = (e) => {
-        imageSrc.current.src = URL.createObjectURL(e.target.files[0]);
+    const onFileUpload = async(e) => {
         setIsLoading(true);
-    }
-
-    const onImageLoad = async() => {
-        doThreshold(cv, imageSrc.current);
-        setResults(await doOCR(outputCanvas.current));
+        setResults(await doOCR(e.target.files[0]));
         setShowResults(true);
+        setIsLoading(false);
     }
-
-    useCustomEventListener('ocrprogress', data => {
-        setProgress(data.detail.progress);
-        console.log(data.detail.progress);
-        if(data.detail.progress === 1) {
-            console.log("end")
-            setIsLoading(false);
-        }
-    });
 
     useEffect(() => {
         setIsLoading(false);
@@ -53,9 +33,7 @@ function HeroHome() {
             {/*    }*/}
             {/*}/>*/}
             <section className="relative">
-                <img alt='' ref={imageSrc} id="imageSrc" height="850" onLoad={onImageLoad}/>
-                <canvas ref={outputCanvas} id="outputCanvas" height="850"/>
-                {isLoading ? <LoadingScreen progress={progress}/> :
+                {isLoading ? <LoadingScreen/> :
                     <div>
                         {(showResults && results) && (<Results show={showResults} results={{
                             'total': results.total,

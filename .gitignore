@@ -2,3 +2,5 @@
 
 client/node_modules
 client/.idea
+
+server/config.json

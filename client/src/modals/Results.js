@@ -13,24 +13,19 @@ const Results = (props) => {
             setTimeout(() => {
                 setShowAlert(false);
                 setShow(false);
-                window.location = "https://kenny2github.github.io/Rite/";
+                window.location.reload();
             }, 2000)
 
             if(!localStorage.getItem('data'))
                 localStorage.setItem('data', JSON.stringify([]));
-            else {
-                let data = JSON.parse(localStorage.getItem('data'));
-                data.push({
-                    'total': results.total,
-                    'spending_category': results.spending_category,
-                    'payment_method': results.payment_method
-                });
-                localStorage.setItem('data', JSON.stringify(data));
-                // reset results just in case
-                // setResults(null);
-            }
-        }else{
+            let data = JSON.parse(localStorage.getItem('data'));
+            data.push(results);
+            localStorage.setItem('data', JSON.stringify(data));
+            // reset results just in case
+            // setResults(null);
+        } else {
             setShow(false);
+            window.location.reload();
         }
     }
 

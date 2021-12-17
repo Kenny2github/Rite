@@ -12,7 +12,6 @@
     "autoprefixer": "^9.8.6",
     "cruip-js-toolkit": "^1.0.3",
     "node-sass": "^5.0.0",
-    "opencv-react": "^0.0.5",
     "postcss": "^8.2.9",
     "react": "^17.0.2",
     "react-custom-events": "^1.0.5",
@@ -23,7 +22,6 @@
     "react-webcam": "^6.0.0",
     "request": "^2.79.0",
     "tailwindcss": "^2.1.1",
-    "tesseract.js": "^2.1.5",
     "web-vitals": "^1.1.1"
   },
   "devDependencies": {
@@ -52,5 +50,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://kenny2github.github.io/Rite/"
+  "homepage": "https://rite.abyx.dev"
 }
