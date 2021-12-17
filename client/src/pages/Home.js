@@ -1,5 +1,4 @@
 import React from 'react';
-import { OpenCvProvider } from 'opencv-react';
 import Header from '../partials/Header';
 import HeroHome from '../partials/HeroHome';
 
@@ -14,9 +13,7 @@ function Home() {
       <main className="flex-grow">
 
         {/*  Page sections */}
-        <OpenCvProvider>
         <HeroHome />
-        </OpenCvProvider>
         {/*<FeaturesHome />*/}
         {/*<FeaturesBlocks />*/}
         {/*<Testimonials />*/}
